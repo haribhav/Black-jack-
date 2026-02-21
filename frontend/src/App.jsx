@@ -84,6 +84,23 @@ function createInitialState() {
   };
 }
 
+function withNaturalBlackjackResult(state) {
+  const playerValue = calculateHandValue(state.playerCards);
+  const dealerValue = calculateHandValue(state.dealerCards);
+
+  if (playerValue === 21 && dealerValue === 21) {
+    return { ...state, phase: 'end', message: 'Both have blackjack! 🫥' };
+  }
+  if (playerValue === 21) {
+    return { ...state, phase: 'end', message: 'Blackjack! You win! 😎' };
+  }
+  if (dealerValue === 21) {
+    return { ...state, phase: 'end', message: 'Dealer has blackjack! 🤡' };
+  }
+
+  return state;
+}
+
 function dealerTurn(state) {
   let { deck, dealerCards } = state;
   while (calculateHandValue(dealerCards) < 17) {
@@ -113,7 +130,7 @@ function Card({ card, hidden = false }) {
 }
 
 function App() {
-  const [game, setGame] = useState(() => createInitialState());
+  const [game, setGame] = useState(() => withNaturalBlackjackResult(createInitialState()));
 
   const playerValue = useMemo(() => calculateHandValue(game.playerCards), [game.playerCards]);
   const dealerValue = useMemo(() => calculateHandValue(game.dealerCards), [game.dealerCards]);
@@ -124,24 +141,7 @@ function App() {
   const revealDealer = game.phase === 'end' || dealerHasBlackjack || playerHasBlackjack;
 
   const startNewGame = () => {
-    const next = createInitialState();
-    const pValue = calculateHandValue(next.playerCards);
-    const dValue = calculateHandValue(next.dealerCards);
-
-    if (pValue === 21 && dValue === 21) {
-      setGame({ ...next, phase: 'end', message: 'Both have blackjack! 🫥' });
-      return;
-    }
-    if (pValue === 21) {
-      setGame({ ...next, phase: 'end', message: 'Blackjack! You win! 😎' });
-      return;
-    }
-    if (dValue === 21) {
-      setGame({ ...next, phase: 'end', message: 'Dealer has blackjack! 🤡' });
-      return;
-    }
-
-    setGame(next);
+    setGame(withNaturalBlackjackResult(createInitialState()));
   };
 
   const hit = () => {
