@@ -1,59 +1,34 @@
-# Blackjack Game (Python)
+# Blackjack Game (Python + React)
 
-This is a **command-line Blackjack game** built using Python.  
-
----
-
-## 🎯 Project Overview
-
-The game simulates a classic **Blackjack** card game where:
-- A player competes against the dealer
-- Cards are shuffled and dealt from a standard deck
-- Blackjack rules are enforced
-- The game supports multiple rounds
+This project now includes:
+- A **Python command-line Blackjack game** (`main.py`)
+- A **React frontend Blackjack UI** (`frontend/`)
 
 ---
 
-## 🧠 Concepts Used
-
-This project focuses on **clean code structure and OOP principles**:
-
-- Classes and objects
-- Encapsulation
-- Game state management
-- Control flow and loops
-- Input validation
-- Randomization (`random` module)
-
----
-
-## 🧱 Class Structure
-
-- **Card**
-  - Represents a single playing card (suit + rank)
-
-- **Deck**
-  - Creates a full 52-card deck
-  - Shuffles cards
-  - Deals cards to players
-
-- **Hand**
-  - Stores cards for player or dealer
-  - Calculates hand value
-  - Handles Blackjack logic (Aces, busts)
-
-- **Game**
-  - Controls the game flow
-  - Handles user input
-  - Determines winners
-
----
-
-## ▶️ How to Run
-
-1. Make sure Python is installed (`python 3.x`)
-2. Clone the repository or download the file
-3. Run the game using:
+## ▶️ Run the Python CLI game
 
 ```bash
-python blackjack.py
+python main.py
+```
+
+---
+
+## ▶️ Run the React frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Then open the local Vite URL (usually `http://localhost:5173`).
+
+---
+
+## Frontend features
+
+- Full Blackjack round flow
+- Hit / Stand / New Round actions
+- Dealer hidden card until reveal
+- Blackjack, bust, tie, and dealer turn logic
